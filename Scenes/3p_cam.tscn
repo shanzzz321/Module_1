@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://b075w03dd2xab"]
+
+[ext_resource type="Script" uid="uid://ctd6y6f5nt5ll" path="res://character_body_3d.gd" id="1_dikm3"]
+[ext_resource type="Script" uid="uid://dlfky12dgllhl" path="res://camera_3d.gd" id="2_cbcee"]
+
+[sub_resource type="Environment" id="Environment_wpjwf"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2lax1"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_t8tog"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8ojh"]
+albedo_color = Color(0.4745098, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rmp2j"]
+material = SubResource("StandardMaterial3D_d8ojh")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4p4mt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_msqq7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c4fgb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aifvk"]
+albedo_color = Color(0.831071, 0.5359588, 0.25319433, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_m7g1x"]
+material = SubResource("StandardMaterial3D_aifvk")
+
+[node name="3P cam" type="Node3D" unique_id=149108085]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1816383591]
+environment = SubResource("Environment_wpjwf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1973270958]
+transform = Transform3D(1, 0, 0, 0, 0.34179577, 0.9397743, 0, -0.9397743, 0.34179577, 0, 18.888958, 0)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=191059346]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_2lax1")
+
+[node name="Floor Mesh" type="StaticBody3D" parent="Floor" unique_id=256160715]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Floor Mesh" unique_id=645860396]
+shape = SubResource("WorldBoundaryShape3D_t8tog")
+
+[node name="Wall" type="MeshInstance3D" parent="." unique_id=874010562]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2.1702185, -6.722822)
+mesh = SubResource("CylinderMesh_rmp2j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall" unique_id=1909883486]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" unique_id=1174082028]
+shape = SubResource("CylinderShape3D_4p4mt")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1604616305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30642295, 0)
+script = ExtResource("1_dikm3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1271594518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
+mesh = SubResource("CapsuleMesh_msqq7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=267125505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
+shape = SubResource("CapsuleShape3D_c4fgb")
+
+[node name="Arm1" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1449452719]
+transform = Transform3D(0.25, 0, 0, 0, -0.14231619, -0.20553854, 0, 0.20553854, -0.14231619, -0.39017373, 0.88337624, -0.6018123)
+mesh = SubResource("CapsuleMesh_m7g1x")
+
+[node name="Arm2" type="MeshInstance3D" parent="CharacterBody3D" unique_id=124424229]
+transform = Transform3D(0.25, 0, 0, 0, 0.18650459, 0.16648132, 0, -0.16648132, 0.18650459, 0.35359406, 0.88337624, -0.5520113)
+mesh = SubResource("CapsuleMesh_m7g1x")
+
+[node name="Camera" type="Node3D" parent="CharacterBody3D" unique_id=1294451739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D/Camera" unique_id=1332213280]
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera/SpringArm3D" unique_id=937953207]
+script = ExtResource("2_cbcee")

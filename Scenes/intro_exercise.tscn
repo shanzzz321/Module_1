@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://766g43mrr871"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpjwf"]
+albedo_color = Color(0.7952836, 0.08610021, 0.112404324, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_kkmbf"]
+material = SubResource("StandardMaterial3D_wpjwf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ws0mv"]
+albedo_color = Color(0.17254902, 0.1764706, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5wvc1"]
+material = SubResource("StandardMaterial3D_ws0mv")
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_oglwt"]
+
+[node name="Intro_exercise" type="Node3D" unique_id=1326455379]
+
+[node name="Ball" type="MeshInstance3D" parent="." unique_id=1547799173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5250542, 2.2810822)
+mesh = SubResource("SphereMesh_kkmbf")
+
+[node name="Sphere" type="MeshInstance3D" parent="." unique_id=1687171018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50229025, -2.1851912)
+mesh = SubResource("BoxMesh_5wvc1")
+
+[node name="Cone" type="MeshInstance3D" parent="." unique_id=765100286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.69924474, -0.018515587)
+mesh = SubResource("TubeTrailMesh_oglwt")
